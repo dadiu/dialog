@@ -1,0 +1,181 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="description" content="home"/>
+	    <meta name="keywords" content="home"/>
+	    <meta name="robots" content="whj"/>
+	    <title>弹窗插件</title>
+	    <link rel="stylesheet" href="http://whj.fayfox.com/css/base.css">
+	</head>
+	<body>
+		<style>
+
+		/* button */
+		button { border:0; padding:3px 10px; cursor:pointer; border-radius:5px; }
+		button[type="button"] {
+		    border:1px solid #ddd;
+		    background-color:#fff;
+		    background-image:-moz-linear-gradient(top, #fff, #eee);
+		    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+		    background-image:-webkit-linear-gradient(top, #fff, #eee);
+		    background-image:-o-linear-gradient(top, #fff, #eee);
+		    background-image:linear-gradient(to bottom, #fff, #eee);
+		    background-repeat:repeat-x;
+		    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);}
+		button[type="submit"], button[type="reset"] {
+		    border:1px solid #34a0d3; color:#fff;
+		    background-color:#38a7dc;
+		    background-image:-moz-linear-gradient(top, #48c2fc, #38a7dc);
+		    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#48c2fc), to(#38a7dc));
+		    background-image:-webkit-linear-gradient(top, #48c2fc, #38a7dc);
+		    background-image:-o-linear-gradient(top, #48c2fc, #38a7dc);
+		    background-image:linear-gradient(to bottom, #48c2fc, #38a7dc);
+		    background-repeat:repeat-x;
+		    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff48c2fc', endColorstr='#ff38a7dc', GradientType=0);}
+		input[type="text"] { padding:5px; border:1px solid #ddd; box-shadow:0 0 2px 0 #fff; background:#fff; color:#555; }
+		.m20 { margin:20px; }
+
+		/* dialog */
+		.w_bg { position:fixed; left:0; top:0; width:100%; height:100%; background:#000; opacity:0.3; filter:alpha(opacity=30); }
+		.w_win { position:absolute; left:50%; top:50%; font-size:12px; border-radius:3px; border:1px solid #aaa; background:#fff; }
+		.w_top { position:relative; padding:10px; border-bottom:1px solid #f0f0f0; font-weight:bold; }
+		.w_close { 
+		    position:absolute; right:5px; top:5px; width:20px; height:20px; text-align:center; line-height:20px; color:#333; font-size:20px; font-weight:200; font-family:'arial'; text-decoration:none;
+		    transform:rotate(45deg);
+		    -ms-transform:rotate(45deg); /* Internet Explorer */
+		    -moz-transform:rotate(45deg); /* Firefox */
+		    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+		    -o-transform:rotate(45deg); /* Opera */
+		}
+		.w_close:hover { color:#3aaae0; }
+		.w_con { padding:20px; }
+		.w_con p { margin-bottom:10px; }
+		.w_bot { text-align:right; padding:10px 20px; }
+		.w_bot button { margin-left:10px; }
+
+		.w_prompt input { width:100%; }
+		</style>
+
+			<button type="button" class="m20 btn_alert">alert</button>
+			<button type="button" class="m20 btn_alertStop">stop alert</button>
+			<button type="button" class="m20 btn_confirm">confirm</button>
+			<button type="button" class="m20 btn_prompt">prompt</button>
+			<button type="button" class="m20 btn_loading">loading</button>
+			<button type="button" class="m20 btn_moment">moment</button>
+
+		<script type="text/javascript" src="http://whj.fayfox.com/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="js/jquery.dialog.min.js"></script>
+		<script type="text/javascript">
+
+			//alert
+			$('.btn_alert').click(function(){
+
+				$.dialog({
+					types : 'alert',
+					title : 'alert',
+					contents : '点击确定关闭弹窗'
+				});
+
+			});
+
+			//stop alert
+			$('.btn_alertStop').click(function(){
+
+				$.dialog({
+					types : 'alert',
+					title : 'alert',
+					contents : '点击确定执行事件',
+					p : [22,33,44],
+					callback : fun.alert
+				});
+
+			});
+
+			//confirm
+			$('.btn_confirm').click(function(){
+
+				$.dialog({
+					types : 'confirm',
+					title : 'comfirm',
+					contents :'<h3>title</h3><p>this is p text</p>',
+					width : 300,
+					height : 180,
+					p : 'test',
+					callback : fun.confirm
+				});
+
+			});
+
+			//prompt
+			$('.btn_prompt').click(function(){
+
+				$.dialog({
+					types : 'prompt',
+					title : 'prompt',
+					contents : '<p>请在下面的输入框输入文字:</p>',
+					width : 300,
+					height : 180,
+					p : 'test',
+					callback : fun.prompt
+
+				});
+			});
+
+			//loading
+			$('.btn_loading').click(function(){
+				
+				$.dialog({
+					types : 'loading',
+					contents : 'loading',
+					width : 100,
+					height : 50
+				})
+			});
+
+			//moment
+			$('.btn_moment').click(function(){
+				
+				$.dialog({
+					types : 'moment',
+					contents : '提示语,几秒后消失',
+					times : 1000,
+					width : 200,
+					height : 50
+				})
+			});
+
+
+
+			var fun = {
+				alert : function(p){
+					$.dialog({
+						types : 'alert',
+						title : 'alert',
+						contents:'输出参数' + p
+					});
+				},
+
+				confirm: function(p){
+					$.dialog({
+						types : 'alert',
+						contents : '输出参数名' + p
+					})
+				},
+
+				prompt : function(resp, p){
+					if(resp){
+						$.dialog({
+							types : 'alert',
+							contents : '您输入的文字为 ' + resp + p
+						})
+					} else {
+						$.dialog({
+							types : 'alert',
+							contents : '请先输入文字'
+						})
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
