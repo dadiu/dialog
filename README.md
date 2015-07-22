@@ -3,7 +3,7 @@
 <h3>兼容性</h3>
 <p>IE7+(关闭按钮用了css3旋转的，IE7,8不支持，建议更换成图片或者文字X)</p>
 <h3>线上地址</h3>
-<p><a href="http://whj.fayfox.com/plug.html?nav=plug" target="_blank">戳这里</a></p>
+<p><a href="http://whj.fayfox.com/demo/plugIn.dialog/" target="_blank">戳这里</a></p>
 <h3>参数说明</h3>
 <pre>
 types : 			//必填  alert/confirm/prompt/loading/moment
