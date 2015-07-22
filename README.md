@@ -24,7 +24,7 @@ callback : null		//可选	确定时候需要运行的方法，默认无
 
 <h3>使用方法</h3>
 <strong>1. html</strong>
-<p>&lt;a href="javascript:;" class="btn_alert"&gt;alert&lt;/a&gt;</p>
+<pre>&lt;a href="javascript:;" class="btn_alert"&gt;alert&lt;/a&gt;</pre>
 <strong>2. css</strong>
 <pre>
 /* button */
@@ -96,101 +96,101 @@ $(".btn_alert").click(function(){
 <strong>4. 实例说明</strong><br/>
 <p>4.1 types=alert提示，确定后关闭提示弹窗</p>
 <pre>
-	$.dialog({
-		types : 'alert',
-		title : 'alert',
-		contents : '点击确定关闭弹窗'
-	});
+$.dialog({
+	types : 'alert',
+	title : 'alert',
+	contents : '点击确定关闭弹窗'
+});
 </pre>
 <p>4.2 types=alert提示，确定后关闭提示弹窗，并且运行一个方法,</p>
 <pre>
+$.dialog({
+	types : 'alert',
+	title : 'alert',
+	contents : '点击确定执行事件',
+	p : [22,33,44],
+	callback : funAlert
+});
+
+//callback 方法
+function funAlert(p){
+
 	$.dialog({
 		types : 'alert',
 		title : 'alert',
-		contents : '点击确定执行事件',
-		p : [22,33,44],
-		callback : funAlert
+		contents:'输出参数' + p
 	});
-	
-	//callback 方法
-	function funAlert(p){
 
-		$.dialog({
-			types : 'alert',
-			title : 'alert',
-			contents:'输出参数' + p
-		});
-
-	}
+}
 </pre>
 <p>4.3 types=confirm提示，带有确定和取消的弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗</p>
 <pre>
+$.dialog({
+	types : 'confirm',
+	title : 'comfirm',
+	contents :'&lt;h3>title&lt;/h3>&lt;p>this is p text&lt;/p>',
+	width : 300,
+	height : 180,
+	p : 'test',
+	callback : funConfirm
+});
+
+//callback 方法
+function funConfirm(p){
+
 	$.dialog({
-		types : 'confirm',
-		title : 'comfirm',
-		contents :'&lt;h3>title&lt;/h3>&lt;p>this is p text&lt;/p>',
-		width : 300,
-		height : 180,
-		p : 'test',
-		callback : funConfirm
-	});
-	
-	//callback 方法
-	function funConfirm(p){
+		types : 'alert',
+		contents : '输出参数名' + p
+	})
 
-		$.dialog({
-			types : 'alert',
-			contents : '输出参数名' + p
-		})
-
-	}
+}
 </pre>
 <p>4.4 types=prompt，带有输入框的提示弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗</p>
 <pre>
-	$.dialog({
-		types : 'prompt',
-		title : 'prompt',
-		contents : '&lt;p>请在下面的输入框输入文字:&lt;/p>',
-		width : 300,
-		height : 180,
-		p : 'test',
-		callback : funPrompt
+$.dialog({
+	types : 'prompt',
+	title : 'prompt',
+	contents : '&lt;p>请在下面的输入框输入文字:&lt;/p>',
+	width : 300,
+	height : 180,
+	p : 'test',
+	callback : funPrompt
 
-	});
-	
-	//callback 方法
-	function funPrompt(resp, p){	//resp为输入框文字
+});
 
-		if(resp){
-			$.dialog({
-				types : 'alert',
-				contents : '您输入的文字为 ' + resp + p
-			})
-		} else {
-			$.dialog({
-				types : 'alert',
-				contents : '请先输入文字'
-			})
-		}
+//callback 方法
+function funPrompt(resp, p){	//resp为输入框文字
 
+	if(resp){
+		$.dialog({
+			types : 'alert',
+			contents : '您输入的文字为 ' + resp + p
+		})
+	} else {
+		$.dialog({
+			types : 'alert',
+			contents : '请先输入文字'
+		})
 	}
+
+}
 </pre>
 <p>4.5 types=loading 页面加载的时候运行</p>
 <pre>
-	$.dialog({
-		types : 'loading',
-		contents : 'loading',
-		width : 100,
-		height : 50
-	})
+$.dialog({
+	types : 'loading',
+	contents : 'loading',
+	width : 100,
+	height : 50
+})
 </pre>
 <p>4.6 types=moment 短暂的文字提示，出现time毫秒后消失</p>
 <pre>
-	$.dialog({
-		types : 'moment',
-		contents : '提示语,几秒后消失',
-		times : 1000,
-		width : 200,
-		height : 50
-	})
+$.dialog({
+	types : 'moment',
+	contents : '提示语,几秒后消失',
+	times : 1000,
+	width : 200,
+	height : 50
+})
 </pre>
