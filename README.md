@@ -51,11 +51,8 @@ button[type="submit"], button[type="reset"] {
     background-image:linear-gradient(to bottom, #48c2fc, #38a7dc);
     background-repeat:repeat-x;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff48c2fc', endColorstr='#ff38a7dc', GradientType=0);}
-
 /* input */
 input[type="text"] { padding:5px; border:1px solid #ddd; box-shadow:0 0 2px 0 #fff; background:#fff; color:#555; }
-
-
 /* dialog */
 .w_bg { position:fixed; left:0; top:0; width:100%; height:100%; background:#000; opacity:0.3; filter:alpha(opacity=30); }
 .w_win { position:absolute; left:50%; top:50%; font-size:12px; border-radius:3px; border:1px solid #aaa; background:#fff; }
