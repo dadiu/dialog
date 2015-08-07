@@ -4,7 +4,7 @@
 - IE7+(关闭按钮用了css3旋转的，IE7,8不支持，建议更换成图片或者文字X)
 
 ###线上地址
-- <a href="http://whj.fayfox.com/demo/plugIn.dialog/" target="_blank">戳这里</a>
+- [戳这里](http://whj.fayfox.com/demo/plugIn.dialog/)
 
 ###参数说明
 <pre>
@@ -25,9 +25,9 @@ callback : null		//可选	确定时候需要运行的方法，默认无
 </pre>
 
 ###使用方法
-####1. html
+1. html
 <pre>&lt;a href="javascript:;" class="btn_alert"&gt;alert&lt;/a&gt;</pre>
-<strong>2. css</strong>
+2. css
 <pre>
 /* button */
 button { border:0; padding:3px 10px; cursor:pointer; border-radius:5px; }
@@ -76,13 +76,16 @@ input[type="text"] { padding:5px; border:1px solid #ddd; box-shadow:0 0 2px 0 #f
 
 .w_prompt input { width:100%; }
 </pre>
-<strong>3. js</strong><br/>
-<small>3.1 先引入以下3个js</small>
+
+3. js
+
+3.1 先引入以下3个js
 <pre>
 jquery-1.8.3.js
 jquery.dialog.min.js
 </pre>
-<small>3.2 最后运行js</small>
+
+3.2 最后运行js
 <pre>
 $(".btn_alert").click(function(){
 
@@ -95,8 +98,9 @@ $(".btn_alert").click(function(){
 });
 </pre>
 
-<strong>4. 实例说明</strong><br/>
-<p>4.1 types=alert提示，确定后关闭提示弹窗</p>
+4. 实例说明
+
+4.1 types=alert提示，确定后关闭提示弹窗
 <pre>
 $.dialog({
 	types : 'alert',
@@ -104,7 +108,8 @@ $.dialog({
 	contents : '点击确定关闭弹窗'
 });
 </pre>
-<p>4.2 types=alert提示，确定后关闭提示弹窗，并且运行一个方法,</p>
+
+4.2 types=alert提示，确定后关闭提示弹窗，并且运行一个方法,
 <pre>
 $.dialog({
 	types : 'alert',
@@ -125,7 +130,8 @@ function funAlert(p){
 
 }
 </pre>
-<p>4.3 types=confirm提示，带有确定和取消的弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗</p>
+
+4.3 types=confirm提示，带有确定和取消的弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
 <pre>
 $.dialog({
 	types : 'confirm',
@@ -147,7 +153,8 @@ function funConfirm(p){
 
 }
 </pre>
-<p>4.4 types=prompt，带有输入框的提示弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗</p>
+
+4.4 types=prompt，带有输入框的提示弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
 <pre>
 $.dialog({
 	types : 'prompt',
@@ -177,7 +184,8 @@ function funPrompt(resp, p){	//resp为输入框文字
 
 }
 </pre>
-<p>4.5 types=loading 页面加载的时候运行</p>
+
+4.5 types=loading 页面加载的时候运行
 <pre>
 $.dialog({
 	types : 'loading',
@@ -186,7 +194,8 @@ $.dialog({
 	height : 50
 })
 </pre>
-<p>4.6 types=moment 短暂的文字提示，出现time毫秒后消失</p>
+
+4.6 types=moment 短暂的文字提示，出现time毫秒后消失
 <pre>
 $.dialog({
 	types : 'moment',
