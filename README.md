@@ -1,12 +1,12 @@
-# dialog
+#各种弹窗插件
 
-## 兼容性
+###兼容性
 - IE7+(关闭按钮用了css3旋转的，IE7,8不支持，建议更换成图片或者文字X)
 
-## 线上地址
+###线上地址
 - <a href="http://whj.fayfox.com/demo/plugIn.dialog/" target="_blank">戳这里</a>
 
-## 参数说明
+###参数说明
 <pre>
 types : 			//必填  alert/confirm/prompt/loading/moment
 id : '',			//可选	给弹窗赋予id值
@@ -24,8 +24,8 @@ callback : null		//可选	确定时候需要运行的方法，默认无
 
 </pre>
 
-## 使用方法
-<strong>1. html</strong>
+###使用方法
+####1. html
 <pre>&lt;a href="javascript:;" class="btn_alert"&gt;alert&lt;/a&gt;</pre>
 <strong>2. css</strong>
 <pre>
