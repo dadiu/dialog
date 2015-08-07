@@ -75,13 +75,13 @@ input[type="text"] { padding:5px; border:1px solid #ddd; box-shadow:0 0 2px 0 #f
 
 3. js
 
--3.1 先引入以下3个js
+3.1 先引入以下3个js
 <pre>
 jquery-1.8.3.js
 jquery.dialog.min.js
 </pre>
 
--3.2 最后运行js
+3.2 最后运行js
 <pre>
 $(".btn_alert").click(function(){
 
@@ -96,7 +96,7 @@ $(".btn_alert").click(function(){
 
 4. 实例说明
 
--4.1 types=alert提示，确定后关闭提示弹窗
+4.1 types=alert提示，确定后关闭提示弹窗
 <pre>
 $.dialog({
 	types : 'alert',
@@ -105,7 +105,7 @@ $.dialog({
 });
 </pre>
 
--4.2 types=alert提示，确定后关闭提示弹窗，并且运行一个方法,
+4.2 types=alert提示，确定后关闭提示弹窗，并且运行一个方法,
 <pre>
 $.dialog({
 	types : 'alert',
@@ -127,7 +127,7 @@ function funAlert(p){
 }
 </pre>
 
--4.3 types=confirm提示，带有确定和取消的弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
+4.3 types=confirm提示，带有确定和取消的弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
 <pre>
 $.dialog({
 	types : 'confirm',
@@ -150,7 +150,7 @@ function funConfirm(p){
 }
 </pre>
 
--4.4 types=prompt，带有输入框的提示弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
+4.4 types=prompt，带有输入框的提示弹窗，点击确定按钮运行方法，点击取消按钮不运行且关闭弹窗
 <pre>
 $.dialog({
 	types : 'prompt',
@@ -181,7 +181,7 @@ function funPrompt(resp, p){	//resp为输入框文字
 }
 </pre>
 
--4.5 types=loading 页面加载的时候运行
+4.5 types=loading 页面加载的时候运行
 <pre>
 $.dialog({
 	types : 'loading',
@@ -191,7 +191,7 @@ $.dialog({
 })
 </pre>
 
--4.6 types=moment 短暂的文字提示，出现time毫秒后消失
+4.6 types=moment 短暂的文字提示，出现time毫秒后消失
 <pre>
 $.dialog({
 	types : 'moment',
