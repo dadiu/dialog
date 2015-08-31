@@ -1,23 +1,30 @@
-/******
-维护：吴海晶(451404370@qq.com)
-
-Parameters
-types : 			//必填  alert/confirm/prompt/loading/moment
-id : '',			//可选	给弹窗赋予id值
-className :'',		//可选	给弹窗赋予class值
-titles : '提示',	//types=confirm ||  prompt 必填; types=alert || loading || moment 不填
-contents : '',		//必填	显示内容
-width : 200,		//可选	弹窗宽度，不填时默认值200
-height : 110,		//可选	弹窗高度，不填时默认值110
-ensure : '确定',	//可选	确定按钮的文字，不填时默认为“确定”
-cancel : '取消',	//可选	取消按钮的文字，不填时默认为“确定”	
-times : int,		//types=moment时 必填; 其他情况不需要
-close : '+',		//可选	右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
-p : '',				//可选	传入方法时需要的参数
-callback : null		//可选	确定时候需要运行的方法，默认无
-
-******/
-
+/**
+ * @url     https://github.com/dadiu/dialog
+ * @data    2015.08.05
+ * @author  wuhaijing
+ * @mail    1004609378@qq.com
+ * @version V1.0.0
+ */
+/********************* 传参说明 *********************/
+/**
+ * 以下均为必填参数
+ * types : string		//弹窗类型，可选择传入：alert/confirm/prompt/loading/moment
+ * contents : string	//显示内容
+ * titles : string		//弹窗标题，types= "confirm ||  prompt" 必填; types=alert || loading || moment 不填
+ * time : int			//弹窗关闭倒计时 types=moment时 必填; 其他情况不需要
+ *
+ * 以下均为可选参数
+ * id : string			//给弹窗赋予id值
+ * className : string	//给弹窗赋予class值
+ * width ： number		//弹窗宽度，不填时默认值200
+ * height ：number		//弹窗高度，不填时默认值110
+ * ensure : string		//确定按钮的文字，不填时默认为“确定”
+ * cancel : string		//取消按钮的文字，不填时默认为“确定”
+ * close : string		//右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
+ * p : string			//传入方法时需要的参数
+ * callback : function	//确定时候需要运行的方法，默认null
+ */
+/******************** 开始 ********************/
 (function($){
 
 	$.dialog = function(options){
