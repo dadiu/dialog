@@ -3,12 +3,13 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.0
+ * @version V1.0.1
+ * @增加关闭方法 可供调用 - type = close即可
  */
 /********************* 传参说明 *********************/
 /**
  * 以下均为必填参数
- * types : string		//弹窗类型，可选择传入：alert/confirm/prompt/loading/moment
+ * types : string		//弹窗类型，可选择传入：alert/confirm/prompt/loading/moment/closeFun
  * contents : string	//显示内容
  * titles : string		//弹窗标题，types= "confirm ||  prompt" 必填; types=alert || loading || moment 不填
  * time : int			//弹窗关闭倒计时 types=moment时 必填; 其他情况不需要
@@ -27,172 +28,175 @@
 /******************** 开始 ********************/
 (function($){
 
-	$.dialog = function(options){
+    $.dialog = function(options){
 
-		var defaults = {
-			types : '',
-			id : '',
-			className :'',
-			titles : '提示',
-			contents : '',
-			width : 200,
-			height : 110,
-			ensure : '确定',
-			cancel : '取消',
-			times : 2000,
-			close : '+',
-			p : '',
-			callback : null
-		},
+        var defaults = {
+                types : '',
+                id : '',
+                className :'',
+                titles : '提示',
+                contents : '',
+                width : 200,
+                height : 110,
+                ensure : '确定',
+                cancel : '取消',
+                times : 2000,
+                close : '+',
+                p : '',
+                callback : null
+            },
 
-		options = $.extend(defaults, options),
+            options = $.extend(defaults, options),
 
-		objs = {
-			win : $('<div>').addClass('w_win'),
-			tops : $('<div>').addClass('w_top').html(options.titles),
-			con : $('<div>').addClass('w_con').html(options.contents),
-			bot : $('<div>').addClass('w_bot'),
-			inp : $('<input>').attr('type','text').addClass('w_prompt'),
-			ensure : $('<button>').attr({'href':'javascript:;', 'type':'submit'}).addClass('w_ensure').html(options.ensure),
-			cancel : $('<button>').attr({'href':'javascript:;', 'type':'button'}).addClass('w_cancel').html(options.cancel),
-			close : $('<a>').attr('href','javascript:;').addClass('w_close').html(options.close),
-			bg : $('<div>').addClass('w_bg')
-		},
+            objs = {
+                win : $('<div>').addClass('w_win'),
+                tops : $('<div>').addClass('w_top').html(options.titles),
+                con : $('<div>').addClass('w_con').html(options.contents),
+                bot : $('<div>').addClass('w_bot'),
+                inp : $('<input>').attr('type','text').addClass('w_prompt'),
+                ensure : $('<a>').attr({'href':'javascript:;'}).addClass('w_ensure').html(options.ensure),
+                cancel : $('<a>').attr({'href':'javascript:;'}).addClass('w_cancel').html(options.cancel),
+                close : $('<a>').attr('href','javascript:;').addClass('w_close').html(options.close),
+                bg : $('<div>').addClass('w_bg')
+            },
 
-		dfunc = {
+            dfunc = {
 
-			init : function(){
+                init : function(){
 
-				var _t = this, DOM = '';
+                    var _t = this, DOM = '';
 
-				objs.tops.append(objs.close);
+                    if(options.type == 'closeFun'){
+                        _t.wClose();
+                        return false;
+                    };
+                    objs.tops.append(objs.close);
 
-				if (options.types == 'alert'){
+                    if (options.types == 'alert'){
 
-					objs.win.addClass('w_alert');
-					objs.win.append(objs.con);
-					objs.win.append(objs.bot);
-					objs.bot.append(objs.ensure);
+                        objs.win.addClass('w_alert');
+                        objs.win.append(objs.con);
+                        objs.win.append(objs.bot);
+                        objs.bot.append(objs.ensure);
 
-					objs.ensure.click(function(){
-						if(options.callback){
-							options.callback(options.p);		//如果有事件 则先运行事件
-						}
-						_t.wClose(objs);
-					});
+                        objs.ensure.click(function(){
+                            if(options.callback){
+                                options.callback(options.p);		//如果有事件 则先运行事件
+                            }
+                            _t.wClose();
+                        });
 
-				} else if (options.types == 'confirm'){
+                    } else if (options.types == 'confirm'){
 
-					objs.win.addClass('w_confirm');
-					objs.win.append(objs.tops);
-					objs.win.append(objs.con);
-					objs.win.append(objs.bot);
-					objs.bot.append(objs.ensure);
-					objs.bot.append(objs.cancel);
+                        objs.win.addClass('w_confirm');
+                        objs.win.append(objs.tops);
+                        objs.win.append(objs.con);
+                        objs.win.append(objs.bot);
+                        objs.bot.append(objs.ensure);
+                        objs.bot.append(objs.cancel);
 
-					objs.ensure.click(function(){
-						if(options.callback){
-							options.callback(options.p);	//如果有事件 则运行事件
-						} else {
-							_t.wClose(objs);	//如果没有事件，则关闭弹窗
-						};
-					});
-
-
-				} else if (options.types == 'prompt'){
-
-					objs.win.addClass('w_prompt');
-					objs.win.append(objs.tops);
-					objs.win.append(objs.con);
-					objs.win.append(objs.bot);
-					objs.con.append(objs.inp);
-					objs.bot.append(objs.ensure);
-					objs.bot.append(objs.cancel);
-
-					objs.ensure.click(function(){
-						if(options.callback){
-							options.callback(objs.inp.val(), options.p);
-						}
-					});
+                        objs.ensure.click(function(){
+                        	_t.wClose();	//如果没有事件，则关闭弹窗
+                            if(options.callback){
+                                options.callback(options.p);	//如果有事件 则运行事件
+                            };
+                        });
 
 
-				} else if (options.types == 'loading'){
-					
-					objs.win.append(objs.con);
+                    } else if (options.types == 'prompt'){
 
-					objs.con.html(options.contents);
+                        objs.win.addClass('w_prompt');
+                        objs.win.append(objs.tops);
+                        objs.win.append(objs.con);
+                        objs.win.append(objs.bot);
+                        objs.con.append(objs.inp);
+                        objs.bot.append(objs.ensure);
+                        objs.bot.append(objs.cancel);
 
-					function t(i){
+                        objs.ensure.click(function(){
+                            if(options.callback){
+                                options.callback(objs.inp.val(), options.p);
+                            }
+                        });
 
-						setTimeout(function(){
-							objs.con.append('.');
-							i++;
 
-							if(i < 4){
-								t(i);
-							} else {
-								objs.con.html(options.contents);
-								t(0);
-							}
+                    } else if (options.types == 'loading'){
 
-						},500);
-						
-					};
-					
-					t(0);
-				} else if(options.types == 'moment'){
+                        objs.win.append(objs.con);
 
-					objs.win.append(objs.con);
-					objs.con.html(options.contents);
-					setTimeout(function(){
-						_t.wClose(objs);
-					},options.times);
-				};
+                        objs.con.html(options.contents);
 
-				objs.close.click(function(){
-					_t.wClose(objs);
-				});
+                        function t(i){
 
-				objs.cancel.click(function(){
-					_t.wClose(objs);
-				});
+                            setTimeout(function(){
+                                objs.con.append('.');
+                                i++;
 
-			},
+                                if(i < 4){
+                                    t(i);
+                                } else {
+                                    objs.con.html(options.contents);
+                                    t(0);
+                                }
 
-			even : function(){
+                            },500);
 
-				//添加样式
-				objs.win.css({
-					'width' : options.width,
-					'height' : options.height,
-					'margin-top' : -options.width/2,
-					'margin-left' : -options.height/2
-				})
+                        };
 
-				//判断是否加了id
-				if(options.id){
-					objs.win.attr('id', options.id);
-				};
+                        t(0);
+                    } else if(options.types == 'moment'){
+                        objs.win.append(objs.con);
+                        objs.con.html(options.contents);
+                        setTimeout(function(){
+                            _t.wClose();
+                        },options.times);
+                    };
 
-				//判断是否加了className
-				if(options.className){
-					objs.win.attr('className', options.className);
-				};
+                    objs.close.click(function(){
+                        _t.wClose();
+                    });
 
-				$('body').append(objs.bg);
-				$('body').append(objs.win);
-				
-			},
+                    objs.cancel.click(function(){
+                        _t.wClose();
+                    });
 
-			wClose : function(){
-				objs.win.remove();
-				objs.bg.remove();
-			}
-		};
+                },
 
-		dfunc.init(options, objs);
-		dfunc.even(options, objs);
+                even : function(){
 
-	};
+                    //添加样式
+                    objs.win.css({
+                        'width' : options.width,
+                        'height' : options.height,
+                        'margin-top' : -options.width/2,
+                        'margin-left' : -options.height/2
+                    })
+
+                    //判断是否加了id
+                    if(options.id){
+                        objs.win.attr('id', options.id);
+                    };
+
+                    //判断是否加了className
+                    if(options.className){
+                        objs.win.attr('className', options.className);
+                    };
+
+                    $('body').append(objs.bg);
+                    $('body').append(objs.win);
+
+                },
+
+                wClose : function(){
+                    console.log("!")
+                    objs.win.remove();
+                    objs.bg.remove();
+                }
+            };
+
+        dfunc.init();
+        dfunc.even();
+
+    };
 
 })(jQuery);
