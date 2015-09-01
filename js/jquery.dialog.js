@@ -49,7 +49,7 @@
             options = $.extend(defaults, options),
 
             objs = {
-                win : $('<div>').addClass('w_win'),
+                win : $('<div>').addClass('w_win').attr("data-plugIn","dialog"),
                 tops : $('<div>').addClass('w_top').html(options.titles),
                 con : $('<div>').addClass('w_con').html(options.contents),
                 bot : $('<div>').addClass('w_bot'),
@@ -57,7 +57,7 @@
                 ensure : $('<a>').attr({'href':'javascript:;'}).addClass('w_ensure').html(options.ensure),
                 cancel : $('<a>').attr({'href':'javascript:;'}).addClass('w_cancel').html(options.cancel),
                 close : $('<a>').attr('href','javascript:;').addClass('w_close').html(options.close),
-                bg : $('<div>').addClass('w_bg')
+                bg : $('<div>').addClass('w_bg').attr("data-plugIn","dialog")
             },
 
             dfunc = {
@@ -67,9 +67,10 @@
                     var _t = this, DOM = '';
 
                     if(options.type == 'closeFun'){
-                        _t.wClose();
+                        $("div[data-plugIn=\"dialog\"]").remove();
                         return false;
                     };
+
                     objs.tops.append(objs.close);
 
                     if (options.types == 'alert'){
@@ -160,6 +161,7 @@
                         _t.wClose();
                     });
 
+                    _t.even();
                 },
 
                 even : function(){
@@ -195,7 +197,6 @@
             };
 
         dfunc.init();
-        dfunc.even();
 
     };
 

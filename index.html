@@ -12,9 +12,9 @@
 		<style>
 
 		/* button */
-		button[type="submit"], button[type="reset"] { border:0; padding:3px 10px; cursor:pointer; border-radius:5px; }
-		button[type="submit"], button[type="reset"] {
-		    border:1px solid #ddd;
+		.btn, .w_ensure,.w_cancel { text-decoration:none; border:0; padding:7px 20px; border-radius:5px; }
+		.w_cancel  {
+		    border:1px solid #ddd; color:#555;
 		    background-color:#fff;
 		    background-image:-moz-linear-gradient(top, #fff, #eee);
 		    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
@@ -23,7 +23,7 @@
 		    background-image:linear-gradient(to bottom, #fff, #eee);
 		    background-repeat:repeat-x;
 		    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);}
-		button[type="submit"], button[type="reset"] {
+		.btn,.w_ensure { margin-right:20px;
 		    border:1px solid #34a0d3; color:#fff;
 		    background-color:#38a7dc;
 		    background-image:-moz-linear-gradient(top, #48c2fc, #38a7dc);
@@ -55,14 +55,26 @@
 		.w_bot button { margin-left:10px; }
 
 		.w_prompt input { width:100%; }
+
+		.demoBar { padding:20px; text-align:center; }
 		</style>
 
-			<button type="button" class="m20 btn_alert">alert</button>
-			<button type="button" class="m20 btn_alertStop">stop alert</button>
-			<button type="button" class="m20 btn_confirm">confirm</button>
-			<button type="button" class="m20 btn_prompt">prompt</button>
-			<button type="button" class="m20 btn_loading">loading</button>
-			<button type="button" class="m20 btn_moment">moment</button>
+		<p class="demoBar">
+			<a href="javascript:;" class="btn btn_alert">alert</a>
+			<a href="javascript:;" class="btn btn_alertStop">stop alert</a>
+			<a href="javascript:;" class="btn btn_confirm">confirm</a>
+			<a href="javascript:;" class="btn btn_prompt">prompt</a>
+			<a href="javascript:;" class="btn btn_loading">loading</a>
+			<a href="javascript:;" class="btn btn_moment">moment</a>
+		</p>
+
+		<p class="demoBar">
+			点击出现 - confirm /
+			点击确定 - loading /
+			等待一分钟后执行关闭 - closeFun
+			<br/><br/><br/>
+			<a href="javascript:;" class="btn" id="fn_demo1">fn_demo1</a>
+		</p>
 
 		<script type="text/javascript" src="http://whj.fayfox.com/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="js/jquery.dialog.js"></script>
@@ -138,7 +150,7 @@
 				
 				$.dialog({
 					types : 'moment',
-					contents : '提示语,几秒后消失',
+					contents : '提示语,1秒后消失',
 					times : 1000,
 					width : 200,
 					height : 50
@@ -177,6 +189,32 @@
 					}
 				}
 			}
+		</script>
+
+		<script>
+
+		$("#fn_demo1").click(function(){
+			$.dialog({
+				types : 'confirm',
+				title : 'comfirm',
+				contents :'<h3>title</h3><p>this is p text</p>',
+				width : 350,
+				height :210,
+				callback :function(){
+					$.dialog({
+						type:"loading",
+						contents :"loading",
+						width:100,
+						height:50
+					});
+
+					setTimeout(function(){
+						$.dialog({type:"closeFun"});
+					},1000)
+				}
+			})
+		})
+		//$.dialog({type:"closeFun"});
 		</script>
 	</body>
 </html>
