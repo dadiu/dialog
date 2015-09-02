@@ -3,26 +3,26 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.2
+ * @version V1.0.3 - 增加兼容IE6
  */
 /********************* 传参说明 *********************/
 /**
  * 以下均为必填参数
- * types : string		//弹窗类型，可选择传入：alert/confirm/prompt/loading/moment/closeFun
- * contents : string	//显示内容
- * titles : string		//弹窗标题，types= "confirm ||  prompt" 必填; types=alert || loading || moment 不填
- * time : int			//弹窗关闭倒计时 types=moment时 必填; 其他情况不需要
+ * types : string       //弹窗类型，可选择传入：alert/confirm/prompt/loading/moment/closeFun
+ * contents : string    //显示内容
+ * titles : string      //弹窗标题，types= "confirm ||  prompt" 必填; types=alert || loading || moment 不填
+ * time : int           //弹窗关闭倒计时 types=moment时 必填; 其他情况不需要
  *
  * 以下均为可选参数
- * id : string			//给弹窗赋予id值
- * className : string	//给弹窗赋予class值
- * width ： number		//弹窗宽度，不填时默认值200
- * height ：number		//弹窗高度，不填时默认值110
- * ensure : string		//确定按钮的文字，不填时默认为“确定”
- * cancel : string		//取消按钮的文字，不填时默认为“确定”
- * close : string		//右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
- * p : string			//传入方法时需要的参数
- * callback : function	//确定时候需要运行的方法，默认null
+ * id : string          //给弹窗赋予id值
+ * className : string   //给弹窗赋予class值
+ * width ： number       //弹窗宽度，不填时默认值200
+ * height ：number       //弹窗高度，不填时默认值110
+ * ensure : string      //确定按钮的文字，不填时默认为“确定”
+ * cancel : string      //取消按钮的文字，不填时默认为“确定”
+ * close : string       //右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
+ * p : string           //传入方法时需要的参数
+ * callback : function  //确定时候需要运行的方法，默认null
  */
 /******************** 开始 ********************/
 (function($){
@@ -81,7 +81,7 @@
 
                         objs.ensure.click(function(){
                             if(options.callback){
-                                options.callback(options.p);		//如果有事件 则先运行事件
+                                options.callback(options.p);        //如果有事件 则先运行事件
                             }
                             _t.wClose();
                         });
@@ -96,9 +96,9 @@
                         objs.bot.append(objs.cancel);
 
                         objs.ensure.click(function(){
-                        	_t.wClose();	//如果没有事件，则关闭弹窗
+                            _t.wClose();    //如果没有事件，则关闭弹窗
                             if(options.callback){
-                                options.callback(options.p);	//如果有事件 则运行事件
+                                options.callback(options.p);    //如果有事件 则运行事件
                             };
                         });
 
@@ -124,7 +124,7 @@
 
                         objs.win.append(objs.con);
 
-                        objs.con.html(options.contents);
+                        objs.con.html(options.contents).css({"text-align":"center","line-height":options.height+"px"});
 
                         function t(i){
 
@@ -185,11 +185,22 @@
 
                     $('body').append(objs.bg);
                     $('body').append(objs.win);
+                    if($.browser.msie && $.browser.version == '6.0'){
+                        objs.bg.css("height",$("html").height());
 
+                        $(window).on('scroll', function(){
+                            objs.win.css({
+                                "top" : $(document).scrollTop() + 200
+                            });
+                            objs.win.css({
+                                "top" : $(document).scrollTop()
+                            });
+                        });
+
+                    };
                 },
 
                 wClose : function(){
-                    console.log("!")
                     objs.win.remove();
                     objs.bg.remove();
                 }
