@@ -204,14 +204,14 @@
 				height :210,
 				callback :function(){
 					$.dialog({
-						type:"loading",
+						types:"loading",
 						contents :"loading",
 						width:100,
 						height:50
 					});
 
 					setTimeout(function(){
-						$.dialog({type:"closeFun"});
+						$.dialog({types:"closeFun"});
 					},1000)
 				}
 			})

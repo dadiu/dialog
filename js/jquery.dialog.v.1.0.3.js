@@ -65,7 +65,7 @@
 
                     var _t = this, DOM = '';
 
-                    if(options.type == 'closeFun'){
+                    if(options.types == 'closeFun'){
                         $("div[data-plugIn=\"dialog\"]").remove();
                         return false;
                     };
@@ -124,7 +124,7 @@
 
                         objs.win.append(objs.con);
 
-                        objs.con.html(options.contents).css({"text-align":"center","line-height":options.height+"px"});
+                        objs.con.html(options.contents).css({"text-align":"center","line-height":options.height+"px","padding":0});
 
                         function t(i){
 
@@ -146,7 +146,8 @@
                         t(0);
                     } else if(options.types == 'moment'){
                         objs.win.append(objs.con);
-                        objs.con.html(options.contents);
+                        objs.con.html(options.contents).css({"text-align":"center","line-height":options.height+"px","padding":0});
+
                         setTimeout(function(){
                             _t.wClose();
                         },options.times);
@@ -169,8 +170,8 @@
                     objs.win.css({
                         'width' : options.width,
                         'height' : options.height,
-                        'margin-top' : -options.width/2,
-                        'margin-left' : -options.height/2
+                        'margin-top' : -options.height/2,
+                        'margin-left' : -options.width/2
                     })
 
                     //判断是否加了id
