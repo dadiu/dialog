@@ -186,12 +186,13 @@
 
                     $('body').append(objs.bg);
                     $('body').append(objs.win);
+
                     if($.browser.msie && $.browser.version == '6.0'){
                         objs.bg.css("height",$("html").height());
 
                         $(window).on('scroll', function(){
                             objs.win.css({
-                                "top" : $(document).scrollTop() + 200
+                                "top" : $(document).scrollTop() + $("html").height()/2
                             });
                             objs.win.css({
                                 "top" : $(document).scrollTop()
