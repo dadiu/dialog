@@ -3,7 +3,7 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.3 - 增加兼容IE6
+ * @version V1.0.4 - 优化 moment时 点击黑色背景 消失
  */
 /********************* 传参说明 *********************/
 /**
@@ -151,6 +151,12 @@
                         setTimeout(function(){
                             _t.wClose();
                         },options.times);
+
+                        //点击背景 消失
+                        objs.bg.click(function(){
+                            _t.wClose();
+                            return false;
+                        });
                     };
 
                     objs.close.click(function(){
