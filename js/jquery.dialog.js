@@ -16,8 +16,8 @@
  * 以下均为可选参数
  * id : string          //给弹窗赋予id值
  * className : string   //给弹窗赋予class值
- * width ： number       //弹窗宽度，不填时默认值200
- * height ：number       //弹窗高度，不填时默认值110
+ * width ： number      //弹窗宽度，不填时默认值200
+ * height ：number      //弹窗高度，不填时默认值110
  * ensure : string      //确定按钮的文字，不填时默认为“确定”
  * cancel : string      //取消按钮的文字，不填时默认为“确定”
  * close : string       //右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
@@ -48,7 +48,7 @@
             options = $.extend(defaults, options),
 
             objs = {
-                win : $('<div>').addClass('w_win').attr("data-plugIn","dialog"),
+                win : $('<div>').addClass('w_win show').attr("data-plugIn","dialog"),
                 tops : $('<div>').addClass('w_top').html(options.titles),
                 con : $('<div>').addClass('w_con').html(options.contents),
                 bot : $('<div>').addClass('w_bot'),
@@ -66,7 +66,15 @@
                     var _t = this, DOM = '';
 
                     if(options.types == 'closeFun'){
-                        $("div[data-plugIn=\"dialog\"]").remove();
+                        var openDom = $("div[data-plugIn=\"dialog\"]");
+                        openDom.removeClass("show");
+                        if($.browser.msie && $.browser.version < 10.0){
+                            openDom.remove();
+                        } else {
+                            setTimeout(function(){
+                                openDom.remove();
+                            },400);
+                        }
                         return false;
                     };
 
@@ -193,7 +201,8 @@
                     $('body').append(objs.bg);
                     $('body').append(objs.win);
 
-                    if($.browser.msie && $.browser.version == '6.0'){
+
+                    if($.browser.msie && $.browser.version == 6.0){
                         objs.bg.css("height",$("html").height());
 
                         $(window).on('scroll', function(){
@@ -209,7 +218,14 @@
                 },
 
                 wClose : function(){
-                    objs.win.remove();
+                    objs.win.removeClass("show");
+                    if($.browser.msie && $.browser.version < 10.0){
+                        objs.win.remove();
+                    } else {
+                        setTimeout(function(){
+                            objs.win.remove();
+                        },400);
+                    }
                     objs.bg.remove();
                 }
             };
