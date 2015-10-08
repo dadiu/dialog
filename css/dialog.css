@@ -31,16 +31,16 @@ transform: scale(0); -webkit-transform: scale(0); -moz-transform: scale(0); -o-t
 animation: zoomOut .4s ease-in-out forwards; -webkit-animation: zoomOut .4s ease-in-out forwards; -moz-animation: zoomOut .4s ease-in-out forwards; -o-animation: zoomOut .4s ease-in-out forwards;
 }
 .w_win.show{ animation: zoomIn .4s ease-in-out forwards; -webkit-animation: zoomIn .4s ease-in-out forwards; -moz-animation: zoomIn .4s ease-in-out forwards; -o-animation: zoomIn .4s ease-in-out forwards;}
+.w_bg.show{
+    transition:all 0.4s ease-out; 
+    -ms-transition:all 0.4s ease-out; /* Internet Explorer */
+    -moz-transition:all 0.4s ease-out; /* Firefox */
+    -webkit-transition:all 0.4s ease-out; /* Safari 和 Chrome */
+    -o-transition:all 0.4s ease-out; /* Opera */
+}
 
 .w_top { position:relative; padding:10px; border-bottom:1px solid #f0f0f0; font-weight:bold; }
-.w_close { 
-    position:absolute; right:5px; top:5px; width:20px; height:20px; text-align:center; line-height:20px; color:#333; font-size:20px; font-weight:200; font-family:'arial'; text-decoration:none;
-    transform:rotate(45deg);
-    -ms-transform:rotate(45deg); /* Internet Explorer */
-    -moz-transform:rotate(45deg); /* Firefox */
-    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
-    -o-transform:rotate(45deg); /* Opera */
-}
+.w_close { position:absolute; right:5px; top:5px; width:20px; height:20px; text-align:center; line-height:20px; color:#333; font-size:20px; font-weight:200; font-family:'arial'; text-decoration:none;}
 .w_close:hover { color:#3aaae0; }
 .w_con { padding:20px; }
 .w_con p { margin-bottom:10px; }

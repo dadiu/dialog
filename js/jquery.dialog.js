@@ -3,7 +3,7 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.4 - 优化 moment时 点击黑色背景 消失
+ * @version V1.0.5 - 优化确定时调用方法
  */
 /********************* 传参说明 *********************/
 /**
@@ -40,7 +40,7 @@
                 ensure : '确定',
                 cancel : '取消',
                 times : 2000,
-                close : '+',
+                close : '×',
                 p : '',
                 callback : null
             },
@@ -56,7 +56,7 @@
                 ensure : $('<a>').attr({'href':'javascript:;'}).addClass('w_ensure').html(options.ensure),
                 cancel : $('<a>').attr({'href':'javascript:;'}).addClass('w_cancel').html(options.cancel),
                 close : $('<a>').attr('href','javascript:;').addClass('w_close').html(options.close),
-                bg : $('<div>').addClass('w_bg').attr("data-plugIn","dialog")
+                bg : $('<div>').addClass('w_bg show').attr("data-plugIn","dialog")
             },
 
             dfunc = {
@@ -104,10 +104,11 @@
                         objs.bot.append(objs.cancel);
 
                         objs.ensure.click(function(){
-                            _t.wClose();    //如果没有事件，则关闭弹窗
                             if(options.callback){
                                 options.callback(options.p);    //如果有事件 则运行事件
+                                return false;
                             };
+                            _t.wClose();    //如果没有事件，则关闭弹窗
                         });
 
 
@@ -195,7 +196,7 @@
 
                     //判断是否加了className
                     if(options.className){
-                        objs.win.attr('className', options.className);
+                        objs.win.addClass(options.className);
                     };
 
                     $('body').append(objs.bg);
@@ -209,7 +210,7 @@
                             objs.win.css({
                                 "top" : $(document).scrollTop() + $("html").height()/2
                             });
-                            objs.win.css({
+                            objs.bg.css({
                                 "top" : $(document).scrollTop()
                             });
                         });
@@ -219,14 +220,17 @@
 
                 wClose : function(){
                     objs.win.removeClass("show");
+                    objs.bg.removeClass("show");
                     if($.browser.msie && $.browser.version < 10.0){
                         objs.win.remove();
+                        objs.bg.remove();
                     } else {
                         setTimeout(function(){
                             objs.win.remove();
+                            objs.bg.remove();
                         },400);
                     }
-                    objs.bg.remove();
+                    
                 }
             };
 
