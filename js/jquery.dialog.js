@@ -3,7 +3,7 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.5 - 优化确定时调用方法
+ * @version V1.1.0 - 增加 parentDom 参数，负责传入父级元素
  */
 /********************* 传参说明 *********************/
 /**
@@ -16,6 +16,7 @@
  * 以下均为可选参数
  * id : string          //给弹窗赋予id值
  * className : string   //给弹窗赋予class值
+ * parentDom : $("")    //负责传入父级元素, 默认为null
  * width ： number      //弹窗宽度，不填时默认值200
  * height ：number      //弹窗高度，不填时默认值110
  * ensure : string      //确定按钮的文字，不填时默认为“确定”
@@ -33,6 +34,7 @@
                 types : '',
                 id : '',
                 className :'',
+                parentDom : null,
                 titles : '提示',
                 contents : '',
                 width : 200,
@@ -199,9 +201,15 @@
                         objs.win.addClass(options.className);
                     };
 
-                    $('body').append(objs.bg);
-                    $('body').append(objs.win);
-
+                    //判断是否传入父级
+                    if(options.parentDom){
+                        options.parentDom.append(objs.bg);
+                        options.parentDom.append(objs.win);
+                    } else {
+                        //否则加入到body中
+                        $('body').append(objs.bg);
+                        $('body').append(objs.win); 
+                    };
 
                     if($.browser.msie && $.browser.version == 6.0){
                         objs.bg.css("height",$("html").height());
