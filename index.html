@@ -31,10 +31,20 @@
 		</p>
 
 		<a href="javascript:;" class="btn btn_alert22">alert22</a>
+		<a href="javascript:;" class="btn btn_default">btn_default</a>
 		<div class="wrap"></div>
 		<script type="text/javascript" src="http://whj.fayfox.com/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="js/jquery.dialog.js"></script>
 		<script type="text/javascript">
+
+
+			//默认
+			$('.btn_default').click(function(){
+
+				$.dialog();
+
+			});
+			
 
 			//alert
 			$('.btn_alert').click(function(){
@@ -46,6 +56,7 @@
 				});
 
 			});
+			//加载wrao中
 			$('.btn_alert22').click(function(){
 
 				$.dialog({

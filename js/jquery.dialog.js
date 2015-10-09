@@ -3,12 +3,13 @@
  * @data    2015.08.05
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.1.0 - 增加 parentDom 参数，负责传入父级元素
+ * @version V1.1.1 - 优化默认为default(即有title，无bot)
+ * @version V1.1.2 - 增加弹窗出来的时候，可传入方法 openFun
  */
 /********************* 传参说明 *********************/
 /**
  * 以下均为必填参数
- * types : string       //弹窗类型，可选择传入：alert/confirm/prompt/loading/moment/closeFun
+ * types : string       //弹窗类型，可选择传入：alert/confirm/prompt/loading/moment/closeFun/default
  * contents : string    //显示内容
  * titles : string      //弹窗标题，types= "confirm ||  prompt" 必填; types=alert || loading || moment 不填
  * time : int           //弹窗关闭倒计时 types=moment时 必填; 其他情况不需要
@@ -31,7 +32,7 @@
     $.dialog = function(options){
 
         var defaults = {
-                types : '',
+                types : 'default',
                 id : '',
                 className :'',
                 parentDom : null,
@@ -44,6 +45,7 @@
                 times : 2000,
                 close : '×',
                 p : '',
+                openFun : null,
                 callback : null
             },
 
@@ -168,6 +170,10 @@
                             _t.wClose();
                             return false;
                         });
+                    } else if(options.types == 'default'){
+                        objs.win.addClass('w_default');
+                        objs.win.append(objs.tops);
+                        objs.win.append(objs.con);
                     };
 
                     objs.close.click(function(){
@@ -209,6 +215,11 @@
                         //否则加入到body中
                         $('body').append(objs.bg);
                         $('body').append(objs.win); 
+                    };
+
+                    //弹窗加入父级时  可传入运行的方法
+                    if(options.openFun){
+                        options.openFun();
                     };
 
                     if($.browser.msie && $.browser.version == 6.0){
