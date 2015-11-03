@@ -24,6 +24,7 @@
  * cancel : string      //取消按钮的文字，不填时默认为“确定”
  * close : string       //右上角关闭按钮的内容，可以传入文字或者图片,默认为“+”,css3旋转45°,不兼容IE8及以下
  * p : string           //传入方法时需要的参数
+ * openFun : functiaon  //弹窗打开时运行的方法
  * callback : function  //确定时候需要运行的方法，默认null
  */
 /******************** 开始 ********************/
@@ -87,6 +88,7 @@
                     if (options.types == 'alert'){
 
                         objs.win.addClass('w_alert');
+                        objs.win.append(objs.tops);
                         objs.win.append(objs.con);
                         objs.win.append(objs.bot);
                         objs.bot.append(objs.ensure);
@@ -94,6 +96,7 @@
                         objs.ensure.click(function(){
                             if(options.callback){
                                 options.callback(options.p);        //如果有事件 则先运行事件
+                                return false;
                             }
                             _t.wClose();
                         });
@@ -214,7 +217,7 @@
                     } else {
                         //否则加入到body中
                         $('body').append(objs.bg);
-                        $('body').append(objs.win); 
+                        $('body').append(objs.win);
                     };
 
                     //弹窗加入父级时  可传入运行的方法
@@ -249,7 +252,7 @@
                             objs.bg.remove();
                         },400);
                     }
-                    
+
                 }
             };
 
